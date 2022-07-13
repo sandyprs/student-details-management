@@ -1,5 +1,7 @@
 import React,{Component} from "react";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import StudentManagementApiServices from "../services/StudentManagementApiServices";
+import SpinnerComponent from "./SpinnerComponent";
 
 class LoginComponent extends Component{
 
@@ -7,7 +9,8 @@ class LoginComponent extends Component{
         super(props)
         this.state = {
             username:"",
-            password:""
+            password:"",
+            loading:false
         }
 
         this.onSubmit = this.onSubmit.bind(this)
@@ -15,10 +18,49 @@ class LoginComponent extends Component{
     }
 
     onSubmit(values){
-        this.props.navigate("/dashboard")
+
+        // this.props.navigate("/dashboard",{replace:true},{state:true})
+        this.setState({
+            loading:true
+        })
+
+        StudentManagementApiServices.getAuthToken(values.username, values.password)
+        .then(
+            (response)=>{
+
+                // console.log(response.data.data);
+                if(response.data.message === "Successful"){
+                    // StudentManagementApiServices.setIsLoggedIn(true)
+                    StudentManagementApiServices.setUpAxiosInterceptors(response.data.data.token)
+                    this.setState({
+                        loading:false
+                    })
+                    this.props.navigate("/dashboard",{replace:true},{state:true})
+
+                }
+
+
+                
+            }
+
+        ).catch(
+            (error)=>{
+                this.setState({
+                    loading:false
+                })
+                this.props.navigate("/error")
+            }
+        )
+        
     }
 
     validate(values){
+        let errors = {}
+        if (!values.username && !values.password) {
+            errors.username = "Please enter username and password"
+        }
+
+        return errors
 
     }
 
@@ -39,10 +81,12 @@ class LoginComponent extends Component{
                 {
                     (props)=>(
                         <Form>
+                            
+                            <ErrorMessage name="username" component="div" className="alert alert-warning mt-3"></ErrorMessage>
+                            
                             <fieldset className="form-group" >
-                                <label style={{padding:"5px"}} className="form-row">Email address</label>
+                                <label style={{padding:"5px"}} className="form-row">Username</label>
                                 <Field className="form-control form-row" style={{padding:"5px"}}  type="text" name="username" placeholder="User Name"></Field>
-                                <small id="emailHelp" style={{padding:"5px"}}  className="form-row text-muted ">We'll never share your email with anyone else.</small>
                             </fieldset>
                             <fieldset className="form-group" >
                                 <label style={{padding:"5px"}} className="form-row">Password</label>
@@ -54,6 +98,7 @@ class LoginComponent extends Component{
                     )
                 }
                </Formik>
+               {this. state.loading && <SpinnerComponent/>}
             </div>
         )
     }

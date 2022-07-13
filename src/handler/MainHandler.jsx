@@ -7,28 +7,45 @@ import HeaderComponent from "../components/HeaderComponent";
 import LoginComponent from "../components/LoginComonent";
 import { BrowserRouter as Router,Route, Routes } from "react-router-dom";
 import withNavigation from "../utils/withNavigation";
+import withParams from "../utils/withParams";
 import StudentListComponent from "../components/StudentListComponent";
+import ErrorComponent from "../components/ErrorComponent";
+import StudentManagementApiServices from "../services/StudentManagementApiServices";
+import AuthenticatedRoute from "../utils/AuthenticatedRoute";
 
 class MainHandler extends Component{
+
+    constructor(props){
+        super(props)
+    }
+
     render(){
+        
         const LoginComponentWithNavigation = withNavigation(LoginComponent)
         const DashboardComponentWithNavigation = withNavigation(DashboardComponent)
         const DetailsEditComponentWithNavigation = withNavigation(DetailsEditComponent)
         const DetailsViewComponentWithNavigation = withNavigation(DetailsViewComponent)
+        const ErrorComponentWithNavigation = withNavigation(ErrorComponent)
+        const HeaderComponentWithNavigation = withNavigation(HeaderComponent)
         const StudentListComponentWithNavigation = withNavigation(StudentListComponent)
+        const StudentListComponentWithParams = withParams(StudentListComponentWithNavigation)
+        const DetailsViewComponentWithParams = withParams(DetailsViewComponentWithNavigation)
+        const DetailsEditComponentWithParams = withParams(DetailsEditComponentWithNavigation)
         return(
             <Router>
                 <div>
                     <div className="container min-vh-100" style={{backgroundColor:"#ededed", padding:"15px"}}>
-                        <HeaderComponent/>
+                        <HeaderComponentWithNavigation />
                         <div style={{marginBottom:"40px"}}>
                             <Routes>
                                 <Route path="/" element={<LoginComponentWithNavigation />}/>
                                 <Route path="/login" element={<LoginComponentWithNavigation />}/>
-                                <Route path="/dashboard" element={<DashboardComponentWithNavigation />}/>
-                                <Route path="/edit-details" element={<DetailsEditComponentWithNavigation />}/>
-                                <Route path="/detail-view" element={<DetailsViewComponentWithNavigation />}/>
-                                <Route path="/student-list" element={<StudentListComponentWithNavigation />}/>
+                                <Route path="/dashboard" element={<AuthenticatedRoute><DashboardComponentWithNavigation /></AuthenticatedRoute>}/>
+                                <Route path="/edit-details/:key" element={<AuthenticatedRoute><DetailsEditComponentWithParams /></AuthenticatedRoute>}/>
+                                <Route path="/detail-view/:key" element={<AuthenticatedRoute><DetailsViewComponentWithParams /></AuthenticatedRoute>}/>
+                                <Route path="/student-list/:type" element={<AuthenticatedRoute><StudentListComponentWithParams /></AuthenticatedRoute>}/>
+                                <Route path="/error" element={<ErrorComponentWithNavigation />}/>
+                                
                             
                             </Routes>
                         </div>

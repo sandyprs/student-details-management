@@ -1,39 +1,209 @@
 import React,{Component} from "react";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import { useLocation } from "react-router-dom";
+import moment from "moment";
+import StudentManagementApiServices from "../services/StudentManagementApiServices";
+import SpinnerComponent from "./SpinnerComponent";
 
 class DetailsEditComponent extends Component{
 
     constructor(props){
         super(props)
-
+        this.state = {
+            student:{},
+            loading:true,
+        }
 
         this.onSubmit = this.onSubmit.bind(this)
         this.validate = this.validate.bind(this)
     }
 
+    componentDidMount(){
+        if(this.props.params.key != -1){
+            StudentManagementApiServices.getStudentDetails(this.props.params.key)
+            .then(
+                response => {
+                    let data = response.data.data
+                    // console.log(data);
+                    this.setState(
+                        {
+                            student:data,
+                            loading:false
+                        }
+                    )
+                    // console.log(data);
+                    
+                }
+            ).catch(
+                (error)=>{
+                    this.setState({
+                        loading:false
+                    })
+                    this.props.navigate("/error")
+                }
+            )
+        }
+
+    }
+
     onSubmit(values){
-        console.log("submitted");
+        this.setState({loading:true})
+        let details = this.mapping(values)
+        // let user = AuthenticationService.getLoggedInUserName()
+        if(this.props.params.key != -1){
+            StudentManagementApiServices.updateStudentDetails(this.props.params.key,details).then(
+                (response)=>{
+                    this.setState({loading:false})
+                    this.props.navigate(`/detail-view/${response.data.data}`,{replace:true})
+                }
+                
+            ).catch(
+                (error)=>{
+                    this.setState({loading:false})
+                    this.props.navigate("/error")
+                }
+            )
+        }else{
+            
+            StudentManagementApiServices.saveStudentDetails(details).then(
+                (response)=>{
+                    this.setState({loading:false})
+                    this.props.navigate(`/detail-view/${response.data.data}`,{replace:true})
+                }
+            ).catch(
+                (error)=>{
+                    this.setState({loading:false})
+                    this.props.navigate("/error")
+                }
+            )
+        }
+    }
+
+    mapping(values){
+
+           let details = {
+                "studentName": values.name,
+                "fatherName": values.dadName,
+                "fatherMobileNo": values.dadPh,
+                "fatherOccupation": values.dadOc,
+                "motherName": values.momName,
+                "motherMobileNo": values.momPh,
+                "motherOccupation": values.momOc,
+                "vill": values.vill,
+                "po": values.po,
+                "ps": values.ps,
+                "dist": values.district,
+                "state": values.state,
+                "pin": values.pin,
+                "dob": values.dob,
+                "adhaarNo": values.adhaar,
+                "gender": values.sex,
+                "nationality": values.natinality,
+                "religion": values.religion,
+                "cast": values.cast,
+                "className": values.classname,
+                "rollNo": values.rollno
+        }
+        return details
+
     }
 
     validate(values){
-        console.log("validate");
+        // console.log(values);
+        let errors = {}
+        if(!values.name &&
+            !values.dadName &&
+            !values.dadPh &&
+            !values.dadOc &&
+            !values.momName &&
+            !values.momPh &&
+            !values.momOc &&
+            !values.vill &&
+            !values.po &&
+            !values.ps &&
+            !values.district &&
+            !values.state &&
+            !values.pin &&
+            !values.dob &&
+            !values.adhaar &&
+            !values.sex &&
+            !values.natinality &&
+            !values.religion &&
+            !values.cast &&
+            !values.classname &&
+            !values.rollno
+        ){
+                errors.name = "Please fill all the fields"
+        }
+
+        // if(!moment(values.dob).isValid){
+        //     errors.dob = "Please provide valid Date"
+        // }
+
+        return errors
     }
 
     render(){
+        let name = this.state.student.studentName || ""
+        let dadName = this.state.student.fatherName || ""
+        let dadPh = this.state.student.fatherMobileNo || ""
+        let dadOc = this.state.student.fatherOccupation || ""
+        let momName = this.state.student.motherName || ""
+        let momPh = this.state.student.motherMobileNo || ""
+        let momOc = this.state.student.motherOccupation || ""
+        let vill = this.state.student.vill || ""
+        let po = this.state.student.po || ""
+        let ps = this.state.student.ps || ""
+        let district = this.state.student.dist || ""
+        let state = this.state.student.state || ""
+        let pin = this.state.student.pin || ""
+        let dob = this.state.student.dob || ""
+        let adhaar = this.state.student.adhaarNo || ""
+        let sex = this.state.student.gender || ""
+        let natinality = this.state.student.nationality || ""
+        let religion = this.state.student.religion || ""
+        let cast = this.state.student.cast || ""
+        let classname = this.state.student.className || ""
+        let rollno = this.state.student.rollNo || ""
+        
         return(
             <div className="container">
-                <Formik
-               initialValues={{}}
-               onSubmit={this.onSubmit}
-               validate={this.validate}
-               validateOnBlur={false}
-               validateOnChange={false}
-               enableReinitialize={true}
+                <label style={{padding:"5px"}}><h5>Personal Details</h5></label>
+                {this.state.loading && <SpinnerComponent/>}
+                {!this.state.loading && <Formik
+                    initialValues={{
+                        name ,
+                        dadName,
+                        dadPh,
+                        dadOc,
+                        momName,
+                        momPh,
+                        momOc,
+                        vill,
+                        po,
+                        ps,
+                        district,
+                        state,
+                        pin,
+                        dob ,
+                        adhaar,
+                        sex,
+                        natinality,
+                        religion,
+                        cast ,
+                        classname ,
+                        rollno,
+                    }}
+                    onSubmit={this.onSubmit}
+                    validate={this.validate}
+                    validateOnBlur={false}
+                    validateOnChange={false}
+                    enableReinitialize={true}
                >
                 {
                     (props)=>(
                         <Form>
-                            <label style={{padding:"5px"}}><h5>Personal Details</h5></label>
+                            <ErrorMessage name="name" component="div" className="alert alert-warning"></ErrorMessage>
                             <fieldset className="form-group" >
                                 <label style={{padding:"5px"}} className="form-row">Student Name</label>
                                 <Field className="form-control form-row" style={{padding:"5px"}}  type="text" name="name" placeholder="Student Name"></Field>
@@ -124,7 +294,7 @@ class DetailsEditComponent extends Component{
                             </div>
                             <fieldset className="form-group" >
                                 <label style={{padding:"5px"}} className="form-row">Class</label>
-                                <Field as="select" className="form-control form-row" style={{padding:"5px"}}  name="class">
+                                <Field as="select" className="form-control form-row" style={{padding:"5px"}}  name="classname">
                                     <option value="">--Select class--</option>
                                     <option value="Nursery">Nursery</option>
                                     <option value="K.G-I">K.G-I</option>
@@ -147,10 +317,11 @@ class DetailsEditComponent extends Component{
                         </Form>
                     )
                 }
-               </Formik>
+               </Formik>}
             </div>
         )
     }
 
 }
+
 export default DetailsEditComponent
