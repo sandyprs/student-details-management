@@ -42,6 +42,12 @@ class DetailsEditComponent extends Component{
                     this.props.navigate("/error")
                 }
             )
+        }else{
+            this.setState(
+                {
+                    loading:false
+                }
+            )
         }
 
     }
