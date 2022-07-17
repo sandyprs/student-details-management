@@ -32,6 +32,7 @@ class StudentListComponent extends Component{
                     this.setState(
                         {
                             banner:true,
+                            loading:false
                         }
                     )
                 }else{
@@ -76,7 +77,7 @@ class StudentListComponent extends Component{
                 <span><h2>Students List</h2></span>
                 <a href={url}>Generate Report</a>
                 {this. state.loading && <SpinnerComponent/>}
-                {this. state.loading && <BannerComponent/>}
+                {this. state.banner && <BannerComponent/>}
                 <ul className="list-group">
                     {this.state.students.map((data) => (
                         <li key={data.rollNo} className="list-group-item" onClick={()=>this.getDetail(data.key)}> 
