@@ -1,8 +1,7 @@
-import fileDownload from "js-file-download";
 import React,{Component} from "react";
-import { Link } from "react-router-dom";
 import { baseUrl, listAllUrl } from "../constants/Constants";
 import StudentManagementApiServices from "../services/StudentManagementApiServices";
+import BannerComponent from "./BannerComponent";
 import SpinnerComponent from "./SpinnerComponent";
 
 class StudentListComponent extends Component{
@@ -12,6 +11,7 @@ class StudentListComponent extends Component{
 
         this.state = {
             loading:true,
+            banner:false,
             students:[
 
             ]
@@ -28,13 +28,21 @@ class StudentListComponent extends Component{
         .then(
             response => {
                 let data = response.data.data
-                this.setState(
-                    {
-                        students:data,
-                        loading:false
-                    }
-                )
-                // console.log(data);
+                if(data.length === 0){
+                    this.setState(
+                        {
+                            banner:true,
+                        }
+                    )
+                }else{
+                    this.setState(
+                        {
+                            students:data,
+                            loading:false
+                        }
+                    )
+                }
+                
             }
         ).catch(
             (error)=>{
@@ -68,6 +76,7 @@ class StudentListComponent extends Component{
                 <span><h2>Students List</h2></span>
                 <a href={url}>Generate Report</a>
                 {this. state.loading && <SpinnerComponent/>}
+                {this. state.loading && <BannerComponent/>}
                 <ul className="list-group">
                     {this.state.students.map((data) => (
                         <li key={data.rollNo} className="list-group-item" onClick={()=>this.getDetail(data.key)}> 
