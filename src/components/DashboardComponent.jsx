@@ -21,7 +21,7 @@ class DashboardComponent extends Component{
         return(
             <div className="container" style={{overflow:"auto"}}>
                 <div className="container">
-                    <button className="btn btn-outline-info" onClick={()=>this.getStudentList("NURSERY")} style={{height:"130px",width:"180px",marginTop:"20px", marginRight:"50px"}}>Nursery</button>
+                    <button className="btn btn-outline-info" onClick={()=>this.getStudentList("Nursery")} style={{height:"130px",width:"180px",marginTop:"20px", marginRight:"50px"}}>Nursery</button>
                     <button className="btn btn-outline-info" onClick={()=>this.getStudentList("K.G-I")} style={{height:"130px",width:"180px",marginTop:"20px", marginLeft:"50px"}}>K.G-I</button>
                 </div>
                 <div className="container">
