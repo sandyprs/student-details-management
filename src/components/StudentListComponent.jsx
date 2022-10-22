@@ -18,7 +18,12 @@ class StudentListComponent extends Component{
         }
 
         this.getDetail = this.getDetail.bind(this)
+        this.addStudent = this.addStudent.bind(this)
         // this.generateReport = this.generateReport.bind(this)
+    }
+
+    addStudent(){
+        this.props.navigate("/edit-details/-1")
     }
 
     componentDidMount(){
@@ -74,8 +79,14 @@ class StudentListComponent extends Component{
         // console.log(url);
         return(
             <div className="container">
+                <div className="container">
+                <a href={url}>
+                        <button className="btn btn-primary" style={{height:"50px",width:"150px",margin:"20px"}}>Generate Report</button>
+                    </a>
+                    <button className="btn btn-primary" onClick={this.addStudent} style={{height:"50px",width:"150px",margin:"20px"}}>+ Add</button>
+                </div>
+                <hr />
                 <span><h2>Students List</h2></span>
-                <a href={url}>Generate Report</a>
                 {this. state.loading && <SpinnerComponent/>}
                 {this. state.banner && <BannerComponent/>}
                 <ul className="list-group">
