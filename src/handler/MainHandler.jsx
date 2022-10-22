@@ -10,7 +10,6 @@ import withNavigation from "../utils/withNavigation";
 import withParams from "../utils/withParams";
 import StudentListComponent from "../components/StudentListComponent";
 import ErrorComponent from "../components/ErrorComponent";
-import StudentManagementApiServices from "../services/StudentManagementApiServices";
 import AuthenticatedRoute from "../utils/AuthenticatedRoute";
 
 class MainHandler extends Component{
@@ -34,9 +33,9 @@ class MainHandler extends Component{
         return(
             <Router>
                 <div>
-                    <div className="container min-vh-100" style={{backgroundColor:"#ededed", padding:"15px"}}>
+                    <div className="container" style={{background:"rgba(250, 250, 250, 0.7)", padding:"15px", minHeight:"100vh"}}>
                         <HeaderComponentWithNavigation />
-                        <div style={{marginBottom:"40px"}}>
+                        <div style={{marginBottom:"40px", overflow: "auto", maxHeight:"100vh"}}>
                             <Routes>
                                 <Route path="/" element={<LoginComponentWithNavigation />}/>
                                 <Route path="/login" element={<LoginComponentWithNavigation />}/>

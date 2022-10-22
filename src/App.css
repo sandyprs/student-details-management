@@ -7,8 +7,22 @@
   justify-content: center;
 }
 
+.table{
+  margin-left: auto;
+  margin-right: auto;
+  width: 400px;
+
+}
+
+.td{
+  text-align: start;
+}
+
 .App {
   text-align: center;
+  background-image: url("https://wallpaperaccess.com/full/3570222.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .App-logo {

@@ -50,183 +50,108 @@ class DetailsViewComponent extends Component{
         return(
             <div className="container">
                 <div>
-                    <label style={{padding:"5px"}}><h5>Personal Details</h5></label>
+                    <label style={{padding:"5px"}}><h5>Details</h5></label>
                 </div>
                 {this.state.loading && <SpinnerComponent/>}
                 {!this.state.loading && <div>
-                    <div className="row">
-                        <div className="col" style={{textAlign:"end"}}>
-                            Student Name
-                        </div>
-                        <div className="col" style={{textAlign:"start"}}>
-                            {this.state.student.studentName}
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col" style={{textAlign:"end"}}>
-                            Father's Name
-                        </div>
-                        <div className="col" style={{textAlign:"start"}}>
-                            {this.state.student.fatherName}
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col" style={{textAlign:"end"}}>
-                            Mobile Number
-                        </div>
-                        <div className="col" style={{textAlign:"start"}}>
-                            {this.state.student.fatherMobileNo}
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col" style={{textAlign:"end"}}>
-                            Father's Occupation
-                        </div>
-                        <div className="col" style={{textAlign:"start"}}>
-                            {this.state.student.fatherOccupation}
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col" style={{textAlign:"end"}}>
-                            Mother's Name
-                        </div>
-                        <div className="col" style={{textAlign:"start"}}>
-                            {this.state.student.motherName}
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col" style={{textAlign:"end"}}>
-                            Mobile Number
-                        </div>
-                        <div className="col" style={{textAlign:"start"}}>
-                            {this.state.student.motherMobileNo}
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col" style={{textAlign:"end"}}>
-                            Mother's Occupation
-                        </div>
-                        <div className="col" style={{textAlign:"start"}}>
-                            {this.state.student.motherOccupation}
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col" style={{textAlign:"end"}}>
-                            Village/City
-                        </div>
-                        <div className="col" style={{textAlign:"start"}}>
-                            {this.state.student.vill}
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col" style={{textAlign:"end"}}>
-                            Post Office
-                        </div>
-                        <div className="col" style={{textAlign:"start"}}>
-                            {this.state.student.po}
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col" style={{textAlign:"end"}}>
-                            Police Station
-                        </div>
-                        <div className="col" style={{textAlign:"start"}}>
-                            {this.state.student.ps}
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col" style={{textAlign:"end"}}>
-                            District
-                        </div>
-                        <div className="col" style={{textAlign:"start"}}>
-                            {this.state.student.dist}
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col" style={{textAlign:"end"}}>
-                            State
-                        </div>
-                        <div className="col" style={{textAlign:"start"}}>
-                            {this.state.student.state}
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col" style={{textAlign:"end"}}>
-                        Pin Number
-                        </div>
-                        <div className="col" style={{textAlign:"start"}}>
-                            {this.state.student.pin}
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col" style={{textAlign:"end"}}>
-                        Date of Birth
-                        </div>
-                        <div className="col" style={{textAlign:"start"}}>
-                            {this.state.student.dob}
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col" style={{textAlign:"end"}}>
-                        Adhaar Number
-                        </div>
-                        <div className="col" style={{textAlign:"start"}}>
-                            {this.state.student.adhaarNo}
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col" style={{textAlign:"end"}}>
-                        Gender
-                        </div>
-                        <div className="col" style={{textAlign:"start"}}>
-                            {this.state.student.gender}
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col" style={{textAlign:"end"}}>
-                        Nationality
-                        </div>
-                        <div className="col" style={{textAlign:"start"}}>
-                            {this.state.student.nationality}
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col" style={{textAlign:"end"}}>
-                        Religion
-                        </div>
-                        <div className="col" style={{textAlign:"start"}}>
-                            {this.state.student.religion}
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col" style={{textAlign:"end"}}>
-                        Cast
-                        </div>
-                        <div className="col" style={{textAlign:"start"}}>
-                            {this.state.student.cast}
-                        </div>
-                    </div>
-                    <div>
-                        <label style={{padding:"5px"}}><h5>Academic Details</h5></label>
-                    </div>
-                    <div className="row">
-                        <div className="col" style={{textAlign:"end"}}>
-                        Class
-                        </div>
-                        <div className="col" style={{textAlign:"start"}}>
-                            {this.state.student.className}
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col" style={{textAlign:"end"}}>
-                            Roll Number
-                        </div>
-                        <div className="col" style={{textAlign:"start"}}>
-                            {this.state.student.rollNo}
-                        </div>
-                    </div>
+                    <table className="table">
+                        <tbody>
+                            <tr>
+                                <td className="td">Student Name</td>
+                                <td className="td">{this.state.student.studentName}</td>
+                            </tr>
+                            <tr>
+                                <td className="td">Date of Birth</td>
+                                <td className="td">{new Date(this.state.student.dob).toLocaleDateString()}</td>
+                            </tr>
+                            <tr>
+                                <td className="td">Adhaar Number</td>
+                                <td className="td">{this.state.student.adhaarNo}</td>
+                            </tr>
+                            <tr>
+                                <td className="td">Gender</td>
+                                <td className="td">{this.state.student.gender}</td>
+                            </tr>
+                            <tr>
+                                <td className="td">Father's Name</td>
+                                <td className="td">{this.state.student.fatherName}</td>
+                            </tr>
+                            <tr>
+                                <td className="td">Mobile Number</td>
+                                <td className="td">{this.state.student.fatherMobileNo}</td>
+                            </tr>
+                            <tr>
+                                <td className="td">Father's Occupation</td>
+                                <td className="td">{this.state.student.fatherOccupation}</td>
+                            </tr>
+                            <tr>
+                                <td className="td">Mother's Name</td>
+                                <td className="td">{this.state.student.motherName}</td>
+                            </tr>
+                            <tr>
+                                <td className="td">Mobile Number</td>
+                                <td className="td">{this.state.student.motherMobileNo}</td>
+                            </tr>
+                            <tr>
+                                <td className="td">Village/City</td>
+                                <td className="td">{this.state.student.vill}</td>
+                            </tr>
+                            <tr>
+                                <td className="td">Post Office</td>
+                                <td className="td">{this.state.student.po}</td>
+                            </tr>
+                            <tr>
+                                <td className="td">Police Station</td>
+                                <td className="td">{this.state.student.ps}</td>
+                            </tr>
+                            <tr>
+                                <td className="td">District</td>
+                                <td className="td">{this.state.student.dist}</td>
+                            </tr>
+                            <tr>
+                                <td className="td">State</td>
+                                <td className="td">{this.state.student.state}</td>
+                            </tr>
+                            <tr>
+                                <td className="td">Pin Number</td>
+                                <td className="td">{this.state.student.pin}</td>
+                            </tr>
+                            <tr>
+                                <td className="td">Date of Admission</td>
+                                <td className="td">{new Date(this.state.student.doa).toLocaleDateString()}</td>
+                            </tr>
+                            <tr>
+                                <td className="td">Nationality</td>
+                                <td className="td">{this.state.student.nationality}</td>
+                            </tr>
+                            <tr>
+                                <td className="td">Religion</td>
+                                <td className="td">{this.state.student.religion}</td>
+                            </tr>
+                            <tr>
+                                <td className="td">Cast</td>
+                                <td className="td">{this.state.student.cast}</td>
+                            </tr>
+                            <tr>
+                                <td className="td">Mother Tongue</td>
+                                <td className="td">{this.state.student.lang}</td>
+                            </tr>
+                            <tr>
+                                <td className="td">Blood Group</td>
+                                <td className="td">{this.state.student.bloodgrp}</td>
+                            </tr>
+                            <tr>
+                                <td className="td">Class</td>
+                                <td className="td">{this.state.student.className}</td>
+                            </tr>
+                            <tr>
+                                <td className="td">Roll Number</td>
+                                <td className="td">{this.state.student.rollNo}</td>
+                            </tr>
+                         </tbody>
+                    </table>
                     <div className="container mt-4">
-                        <Link className="btn btn-primary" to={{pathname:`/edit-details/${this.props.params.key}`}}>Edit</Link>
+                        <Link className="btn btn-primary" to={{pathname:`/edit-details/${this.props.params.key}`, passData: this.student}}>Edit Details</Link>
                     </div>
                 </div>}
                 

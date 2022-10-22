@@ -83,16 +83,17 @@ class LoginComponent extends Component{
                         <Form>
                             
                             <ErrorMessage name="username" component="div" className="alert alert-warning mt-3"></ErrorMessage>
-                            
-                            <fieldset className="form-group" >
-                                <label style={{padding:"5px"}} className="form-row">Username</label>
-                                <Field className="form-control form-row" style={{padding:"5px"}}  type="text" name="username" placeholder="User Name"></Field>
-                            </fieldset>
-                            <fieldset className="form-group" >
-                                <label style={{padding:"5px"}} className="form-row">Password</label>
-                                <Field className="form-control form-row" style={{padding:"5px"}}  type="password" name="password" placeholder="Password"></Field>
-                            </fieldset>
-                            <input className="btn btn-primary" type="submit" value="Login"></input>
+                            <div className="container" style={{marginTop:"150px", width:"350px", backgroundColor:"snow", padding:"25px", borderRadius:"9px"}}>
+                                <fieldset>
+                                    {/* <label style={{padding:"5px"}} className="form-row">Username</label> */}
+                                    <Field className="form-control" style={{marginTop:"16px", padding:"5px"}}  type="text" name="username" placeholder="User Name"></Field>
+                                </fieldset>
+                                <fieldset>
+                                    {/* <label style={{padding:"5px"}} className="form-row">Password</label> */}
+                                    <Field className="form-control" style={{marginTop:"8px", padding:"5px"}}  type="password" name="password" placeholder="Password"></Field>
+                                </fieldset>
+                                <input className="btn btn-primary" style={{marginTop:"16px", padding:"5px"}} type="submit" value="Login"></input>
+                            </div>
 
                         </Form>
                     )

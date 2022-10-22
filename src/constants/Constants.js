@@ -1,4 +1,5 @@
 export const baseUrl = "https://student-details-management-web.herokuapp.com/api";
+// export const baseUrl = "http://localhost:8080/api";
 export const authUrl = "/authenticate";
 export const saveUrl = "/save-student";
 export const updateUrl = "/update-details/{key}";
