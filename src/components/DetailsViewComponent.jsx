@@ -14,8 +14,12 @@ class DetailsViewComponent extends Component{
             loading:true
         }
 
-        
+        this.addStudent = this.addStudent.bind(this)
 
+    }
+
+    addStudent(){
+        this.props.navigate("/edit-details/-1")
     }
 
     componentDidMount(){
@@ -151,7 +155,8 @@ class DetailsViewComponent extends Component{
                          </tbody>
                     </table>
                     <div className="container mt-4">
-                        <Link className="btn btn-primary" to={{pathname:`/edit-details/${this.props.params.key}`, passData: this.student}}>Edit Details</Link>
+                        <Link className="btn btn-warning" style={{height:"50px",width:"150px",margin:"20px"}} to={{pathname:`/edit-details/${this.props.params.key}`, passData: this.student}}>Update</Link>
+                        <button className="btn btn-primary" onClick={this.addStudent} style={{height:"50px",width:"150px",margin:"20px"}}>+ Add</button>
                     </div>
                 </div>}
                 

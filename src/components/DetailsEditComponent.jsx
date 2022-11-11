@@ -161,7 +161,7 @@ class DetailsEditComponent extends Component {
         let vill = this.state.student.vill || ""
         let po = this.state.student.po || ""
         let ps = this.state.student.ps || ""
-        let district = this.state.student.dist || ""
+        let district = this.state.student.dist || "Purba Medinipur"
         let state = this.state.student.state || "West Bengal"
         let pin = this.state.student.pin || ""
         let dob = this.state.student.dob || ""
@@ -251,7 +251,17 @@ class DetailsEditComponent extends Component {
                                 </fieldset>
                                 <fieldset className="form-group" >
                                     <label style={{ padding: "5px" }} className="form-row">Father's Occupation</label>
-                                    <Field className="form-control form-row" style={{ padding: "5px" }} type="text" name="dadOc" placeholder="Father's Occupation"></Field>
+                                    <Field as="select" className="form-control form-row" style={{ padding: "5px" }} type="text" name="dadOc" placeholder="Father's Occupation">
+                                    <option value="">--Select Ocupation--</option>
+                                        <option value="Service">Service</option>
+                                        <option value="Farmer">Farmer</option>
+                                        <option value="Carpenter">Carpenter</option>
+                                        <option value="Bussiness">Bussiness</option>
+                                        <option value="Mason">Mason</option>
+                                        <option value="Doctor">Doctor</option>
+                                        <option value="Barber">Barber</option>
+                                        <option value="Other">Other</option>
+                                    </Field>
                                 </fieldset>
                                 <fieldset className="form-group" >
                                     <label style={{ padding: "5px" }} className="form-row">Mother's Name</label>
@@ -299,11 +309,26 @@ class DetailsEditComponent extends Component {
                                 </fieldset>
                                 <fieldset className="form-group" >
                                     <label style={{ padding: "5px" }} className="form-row">Religion</label>
-                                    <Field className="form-control form-row" style={{ padding: "5px" }} type="text" name="religion" placeholder="Religion"></Field>
+                                    <Field as="select" className="form-control form-row" style={{ padding: "5px" }} type="text" name="religion" placeholder="Religion">
+                                        <option value="">--Select Religion--</option>
+                                        <option value="Hinduism">Hinduism</option>
+                                        <option value="Islam">Islam</option>
+                                        <option value="Christianity">Christianity</option>
+                                        <option value="Buddhism">Buddhism</option>
+                                        <option value="Sikhism">Sikhism</option>
+                                        <option value="Other">Other</option>
+                                    </Field>
                                 </fieldset>
                                 <fieldset className="form-group" >
                                     <label style={{ padding: "5px" }} className="form-row">Cast</label>
-                                    <Field className="form-control form-row" style={{ padding: "5px" }} type="text" name="cast" placeholder="Cast"></Field>
+                                    <Field as="select" className="form-control form-row" style={{ padding: "5px" }} type="text" name="cast" placeholder="Cast">
+                                        <option value="">--Select Cast--</option>
+                                        <option value="General">General</option>
+                                        <option value="OBC-A">OBC-A</option>
+                                        <option value="OBC-B">OBC-B</option>
+                                        <option value="ST">ST</option>
+                                        <option value="SC">SC</option>
+                                    </Field>
                                 </fieldset>
                                 <fieldset className="form-group" >
                                     <label style={{ padding: "5px" }} className="form-row">Mother Tongue</label>
